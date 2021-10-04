@@ -38,7 +38,7 @@ class ProductDAO
 
     public static function searchProductByDesc($desc) {
         // search for products by description in database
-        $products = DB::table('product')->where('Description', $desc);
+        $products = DB::table('product')->where('Description', 'like', $desc)->get();
 
         if ($products->count() > 0) {
             return $products;
@@ -77,10 +77,14 @@ class ProductDAO
     public static function updateProduct($product) {
         // update entire product
         DB::update('update product set Name = ? and Description = ? and Price = ? and Quantity = ? and Image = ? where ID = ?', [$product->getName(), $product->getDescription(), $product->getPrice(), $product->getQuantity, $product->getImage(), $product->getID()]);
+
+        return 200;
     }
 
     public static function deleteProduct($productID) {
         // Delete product from DB based on ID
         DB::table('product')->delete($productID);
+
+        return 200;
     }   
 }

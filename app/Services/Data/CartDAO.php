@@ -100,10 +100,14 @@ class CartDAO
     }
 
     public static function update($cart) {
+        DB::update('update cart set userID = ? where ID = ?', [$cart->getUserID(), $cart->getID()]);
 
+        return 200;
     }
 
     public static function delete($id) {
         DB::table('cart')->delete($id);
+
+        return 200;
     }
 }

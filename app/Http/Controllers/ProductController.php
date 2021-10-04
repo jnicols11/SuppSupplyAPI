@@ -81,6 +81,7 @@ class ProductController extends Controller
 
     public function updateProduct(Request $request) {
         // Establish variables from
+        
     }
 
     public function deleteProduct(Request $request) {

@@ -71,10 +71,14 @@ class UserDAO
     public static function updatePassword($ID, $password) {
         // update user password in database
         DB::update('update user set Password = ? where ID = ?', [$password, $ID]);
+
+        return 200;
     }
 
     public static function delete($userID) {
         // Delete user in database
         DB::delete('delete user where ID = ?', [$userID]);
+
+        return 200;
     }
 }
