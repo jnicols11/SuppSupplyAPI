@@ -98,10 +98,35 @@ class UserController extends Controller
 	}
 
 	public function updateUser(Request $request) {
-		
+		// Establish variables from Request
+		$id = $request->input('id');
+		$firstName = $request->input('firstName');
+		$lastName = $request->input('lastName');
+		$email = $request->input('email');
+
+		// populate user model
+		$user = new UserModel($id, $firstName, $lastName, $email, null);
+
+		if (UserService::update($user) == 200) {
+			return response()->json([
+				'message' => 'User updated successfully'
+			], 200);
+		} else {
+			return response()->json([
+				'message' => 'Internal Server Error'
+			], 500);
+		}
 	}
 
-	public function deleteUser(Request $request) {
-
+	public function deleteUser($id) {
+		if (UserService::delete($id) == 200) {
+			return response()->json([
+				'message' => 'User Deleted Successfully'
+			], 200);
+		} else {
+			return response()->json([
+				'message' => 'Internal Server Error'
+			], 500);
+		}
 	}
 }
